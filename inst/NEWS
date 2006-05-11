@@ -1,0 +1,51 @@
+######################################################################
+#  News: to package startupmsg
+######################################################################
+
+##############
+v 0.3
+##############
+
+* inserted references to the mail thread 
+  "Wishlist: 'quietly' argument for .onAttach() / .First.lib()"
+  on r-devel, April 2006 into seealso  
+
+##############
+v 0.2
+##############
+
+* abolished: S3 class StartupVersionMessage with corresponding constructor
+* abolished: call startupVersionMessage
+* abolished: control for linestarter (anyone could do this himself: 
+             + the developper using his own SMHandler 
+             + the user by specifying a suitable custom restart
+* abolished: wrapper onlyversionStartupMessages
+* abolished: modified output in startMessage
+
+* instead: extended S3 class StartupMessage by a slot 'type' with corresponding
+           accessor startupType
+* instead: onlytypeStartupMessages with an atypes argument to filter out 
+           types that are to be shown
+* instead: introduction of mystartMessage with a 
+* instead: startMessage now comes with a type argument
+* instead/new: SMHandler argument for mystartupMessage and buildStartupMessage
+               defaulting to mySMHandler
+* clarified: code to buildStartupMessage
+
+* new: separation into "general routines" documented in ?"startmsg"
+       and an illustration covering mystartupMessage and buildStartupMessage
+       documented in ?"mystartupMessage"
+* new: custom restart (idea: Seth Falcon)
+
+
+##############
+v 0.1
+##############
+
+* defined S3 classes StartupMessage, StartupVersionMessage with corresponding constructors
+* accessor startupPackage
+* wrappers suppressStartupMessages, onlyversionStartupMessages
+* calls startupMessage, startupVersionMessage
+* utilities readVersionInformation, readURLInformation, pointertoNEWS, infoShow, NEWS
+* main function buildStartupMessage (also controllable by options "StartupBanner" resp. "StartupLinestarter")
+   
