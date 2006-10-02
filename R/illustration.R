@@ -28,8 +28,9 @@ mystartupMessage <- function(..., domain=NULL, pkg="", type="version", SMHandler
  invisible(NULL) 
 }
 
-buildStartupMessage <- function(..., pkg, library=NULL, domain=NULL, 
-                                packageHelp=FALSE, MANUAL = NULL, SMHandler=mySMHandler){
+buildStartupMessage <- function(..., pkg, library=NULL, domain=NULL,
+                                packageHelp=FALSE, MANUAL = NULL, VIGNETTE = NULL,
+                                SMHandler=mySMHandler){
 #
 tit.vers <- readVersionInformation(pkg,library)
 if((!getOption("StartupBanner")=="off")||is.null(getOption("StartupBanner"))) 
@@ -64,7 +65,10 @@ if((getOption("StartupBanner")=="complete")||is.null(getOption("StartupBanner"))
                                             MANUALS <- c("\n  ",MANUALpath)}  
                 }
          }                          
-     L <- sum(!is.null(URL), packageHelp , !is.null(NEWS) , MANUALL)
+     VIGNETTES = ifelse(!is.null(VIGNETTE), paste("\n",VIGNETTE,sep="",collapse=""), "")
+
+     ## are there any info-lines?
+     L <- sum(!is.null(URL), packageHelp , !is.null(NEWS) , MANUALL, !is.null(VIGNETTE))
      
      ##determining the separators:
      seps <- character(3)
@@ -75,7 +79,7 @@ if((getOption("StartupBanner")=="complete")||is.null(getOption("StartupBanner"))
      #
      if (L>0)
          {mystartupMessage("For more information see ", 
-                         packageHelpS, seps[1], NEWSS, seps[2], URLS, seps[3], MANUALS, "\n",  
+                         packageHelpS, seps[1], NEWSS, seps[2], URLS, seps[3], MANUALS, VIGNETTES, "\n",  
                          domain=domain, pkg=pkg, type="information", SMHandler=SMHandler)
          }
      

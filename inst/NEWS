@@ -3,6 +3,13 @@
 ######################################################################
 
 ##############
+v 0.4
+##############
+
+* deleted: import "methods" from Namespace
+* included: argument "VIGNETTE" in function "buildStartupMessage"
+
+##############
 v 0.3
 ##############
 

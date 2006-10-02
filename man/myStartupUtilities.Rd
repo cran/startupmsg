@@ -12,7 +12,7 @@ mystartupMessage(..., domain = NULL, pkg = "", type="version",
                  SMHandler=mySMHandler)
 
 buildStartupMessage(..., pkg, library=NULL, domain=NULL, 
-                    packageHelp=FALSE, MANUAL = NULL, 
+                    packageHelp=FALSE, MANUAL = NULL, VIGNETTE = NULL,
                     SMHandler=mySMHandler)
 }
 \arguments{
@@ -30,6 +30,8 @@ buildStartupMessage(..., pkg, library=NULL, domain=NULL,
   \item{packageHelp}{logical: is there help available as \code{?}\var{<pkg-name>} ?}
   \item{MANUAL}{character or \code{NULL} if \code{!is.null(MANUAL)}  the name of a manual distributed together with the 
                 package (with relative path within the library) or an URL}
+  \item{VIGNETTE}{character or \code{NULL} if \code{!is.null(VIGNETTE)}  an indication of one or more vignettes available
+  to this package}
   \item{...}{character vectors (which are pasted together with no separator)}
   }
 
@@ -61,6 +63,7 @@ To generate a complete start-up message, we provide \code{buildStartupMessage}: 
          \item \code{NEWS("}\var{<pkg-name>}\code{")}, if there is a \file{NEWS} file,   
          \item \code{URL}, if there is a \code{URL} mentioned in the \file{DESCRIPTION} file,   
          \item if there is a  \code{MANUAL} argument, the file / the URL to this manual 
+         \item if there is a  \code{VIGNETTE} argument, \code{VIGNETTE} is printed out indicating a vignette location
         }
 }
 
