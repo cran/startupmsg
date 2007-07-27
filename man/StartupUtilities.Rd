@@ -94,6 +94,9 @@ The user may suppress the start-up messages produced by these utilities as follo
 
 \itemize{\item \code{suppressStartupMessages(expr)} 
                       suppresses all messages issued by \code{startupMessage} in the expression \code{expr} within the parentheses%          
+         \item \code{suppressPackageStartupMessages(expr)}: 
+                     from package version 0.5 on, is the same as \code{suppressStartupMessages} for our start-up banners, but more 
+                     generally suppresses all messages of S3-class \code{packageStartupMessage} (from \pkg{base} package)%
          \item \code{onlyversionStartupMessages(expr, atypes="version")} 
                     only shows messages issued by \code{startupMessage} in the expression \code{expr} within the parentheses, if
                      there slot \code{type} is contained in the \code{atypes} argument
@@ -160,7 +163,12 @@ NEWS("stats") ## no NEWS file;
          \url{https://stat.ethz.ch/pipermail/r-devel/2006-April/037382.html}}
 
 \keyword{utilities}
-
-
+\concept{startup}
+\concept{S3 message class}
+\concept{message}
+\concept{startup message}
+\concept{info file}
+\concept{NEWS}
+\concept{pointer to news}
 
 

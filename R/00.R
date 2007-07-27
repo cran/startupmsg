@@ -6,6 +6,6 @@
 #            library <- .libPaths()
 
 #  if(any(file.exists(file.path(library,"startupmsg"))))
-     buildStartupMessage(pkg="startupmsg", library=library, packageHelp=TRUE)
+buildStartupMessage(pkg="startupmsg", library=library, packageHelp=TRUE)
   invisible()
 } 

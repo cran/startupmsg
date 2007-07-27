@@ -3,6 +3,14 @@
 ######################################################################
 
 ##############
+v 0.5
+##############
+
+* startup messages are now also of S3-class 'packageStartupMessage'
+  and hence may now also be suppressed by 
+  suppressPackageStartupMessages() (from package 'base')
+
+##############
 v 0.4
 ##############
 

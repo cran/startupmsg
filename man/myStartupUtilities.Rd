@@ -124,5 +124,10 @@ buildStartupMessage(pkg="stats", msg, packageHelp=TRUE, MANUAL="demo/nlm.R")
           on r-devel by Brian Ripley, 
          \url{https://stat.ethz.ch/pipermail/r-devel/2006-April/037281.html}}
 \keyword{utilities}
-
+\concept{startup}
+\concept{S3 message class}
+\concept{message}
+\concept{startup message}
+\concept{constructor}
+\concept{generating function}
 

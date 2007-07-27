@@ -4,9 +4,10 @@
 
 
 ### constructor of condition "StartupMessage"
-StartupMessage <- function (message, call = NULL, pkg="", type="version") 
-structure(list(message = message, call = call, package=pkg, type=type),
-               class = c("StartupMessage", "condition", "message", "simpleMessage"))
+StartupMessage <- function (message, call = NULL, pkg = "", type = "version") 
+structure(list(message = message, call = call, package = pkg, type = type),
+               class = c("StartupMessage", "packageStartupMessage", "condition", 
+                         "message", "simpleMessage"))
 
 ### accessor to slot package
 startupPackage <- function(startupmessage) {startupmessage$"package"}
@@ -17,18 +18,25 @@ startupType <- function(startupmessage) {startupmessage$"type"}
 ### suppressing Startup messages by a wrapper
 suppressStartupMessages<-
 function (expr) 
-withCallingHandlers(expr, StartupMessage = function(c) invokeRestart("muffleMessage"))
+withCallingHandlers(expr, StartupMessage = 
+                          function(c) invokeRestart("muffleMessage"))
 
 onlytypeStartupMessages<-
 function (expr,atypes="version") 
-{withCallingHandlers(expr, StartupMessage = function(c) {invokeRestart(r="onlytypeMessage", c0=c, atypes=atypes)}) }
+{withCallingHandlers(expr, StartupMessage = 
+                     function(c) {invokeRestart(r = "onlytypeMessage", 
+                                                c0 = c, atypes=atypes)}) }
 
 ### generating a startupMessage
 startupMessage <- function(..., domain=NULL, pkg="", type="version") {
-    withRestarts( withCallingHandlers(message(...,domain=domain), message=function(cond) {
-                                      SM <- StartupMessage(conditionMessage(cond), conditionCall(cond), pkg, type)
-                                      signalCondition(SM)
-                                      }), 
+    withRestarts( withCallingHandlers(
+                       message(..., domain=domain), 
+                       message = function(cond)
+                              {SM <- StartupMessage(conditionMessage(cond), 
+                                                    conditionCall(cond), 
+                                                    pkg, type)
+                              signalCondition(SM)
+                              }      ), 
                   onlytypeMessage = function(c0,atypes){
                                if(startupType(c0) %in% atypes) 
                                   writeLines(conditionMessage(c0),stderr())               
