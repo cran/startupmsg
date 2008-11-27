@@ -2,22 +2,23 @@
 
 ##note: to avoid misunderstandings: 'SMHandler' stands for /S/tartup/M/essage/Handler/
 
-mySMHandler <- function(c) {
-    pkg <- startupPackage(c)
-    linestarter <- paste(":",pkg,"> ", sep ="")                              
-    linestarterN <- paste("\n",linestarter, sep ="")
-    linestarterE <- paste(linestarterN,"$",sep="")
-    writeLines(paste(linestarter, sub(linestarterE,"\n", 
-                     gsub("\n", linestarterN, 
-                          conditionMessage(c))),sep=""),stderr())                                               
-}
+#mySMHandler <- function(c) {
+#    pkg <- startupPackage(c)
+#    npkg <- nchar(pkg)
+#    linestarter <- paste(":",pkg,"> ", sep ="")                              
+#    linestarterN <- paste("\n",linestarter, sep ="")
+#    linestarterE <- paste(linestarterN,"$",sep="")
+#    writeLines(paste(linestarter, sub(linestarterE,"\n", 
+#                     gsub("\n", linestarterN, 
+#                          conditionMessage(c))),sep=""),stderr())                                               
+#}
 
 
 mystartupMessage <- function(..., domain = NULL, pkg = "", type = "version", 
-                             SMHandler = mySMHandler){
+                             SMHandler = mySMHandler, endline = FALSE){
  withRestarts(withCallingHandlers(
                      startupMessage(..., domain = domain, 
-                                    pkg = pkg, type=type), 
+                                    pkg = pkg, type=type, endline = endline), 
                      StartupMessage=function(m)
                             {signalCondition(m)
                              invokeRestart("custom",c=m,f=SMHandler)}
@@ -45,10 +46,8 @@ if((!getOption("StartupBanner")=="off")||is.null(getOption("StartupBanner")))
                         SMHandler = SMHandler)
 ###
 if((getOption("StartupBanner")=="complete")||
-    is.null(getOption("StartupBanner"))) 
-    {if (length(list(...))>0)
-         mystartupMessage(..., domain=domain, pkg=pkg, type="notabene", 
-                          SMHandler=SMHandler)
+    is.null(getOption("StartupBanner"))){ 
+     llist <- length(list(...))
      ### checks as to existence of URL- NEWS- and MANUAL-information
      #
      URL <- readURLInformation(pkg,library)
@@ -97,15 +96,23 @@ if((getOption("StartupBanner")=="complete")||
      if( (MANUALL|| !is.null(URL)) && is.null(NEWS)) 
           seps[1] <- gettext(", as well as", domain = domain) 
      #
-     if (L>0)
-         {mystartupMessage("For more information see ", 
+     if (L>0){
+          if (llist > 0)
+          mystartupMessage(..., domain=domain, pkg=pkg, type="notabene", 
+                          SMHandler=SMHandler)
+
+          mystartupMessage("For more information see ", 
                          packageHelpS, seps[1], NEWSS, seps[2], URLS, seps[3], 
                          MANUALS, VIGNETTES, "\n",  
                          domain = domain, pkg = pkg, type = "information", 
-                         SMHandler = SMHandler)
-         }
-     
+                         SMHandler = SMHandler, endline = TRUE)
     }
+    else{
+          if (llist > 0)
+          mystartupMessage(..., domain=domain, pkg=pkg, type="notabene", 
+                          SMHandler=SMHandler, endline = TRUE)
+    } 
+   }
 }
    
 ########### end Examples

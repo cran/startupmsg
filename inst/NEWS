@@ -3,6 +3,16 @@
 ######################################################################
 
 ##############
+v 0.5.3
+##############
+  
+  * new issuer 'mySMHandler' to cope with long package names and
+     variable "paper" widths acc. to getOption("width")
+     (automatically inserts line breaks...)
+  * moved license to LGPL-3
+
+  
+##############
 v 0.5
 ##############
 

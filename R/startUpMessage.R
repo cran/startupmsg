@@ -4,15 +4,19 @@
 
 
 ### constructor of condition "StartupMessage"
-StartupMessage <- function (message, call = NULL, pkg = "", type = "version") 
-structure(list(message = message, call = call, package = pkg, type = type),
+StartupMessage <- function (message, call = NULL, pkg = "", type = "version", 
+                            endline = FALSE) 
+structure(list(message = message, call = call, package = pkg, type = type,
+               endline = endline),
                class = c("StartupMessage", "packageStartupMessage", "condition", 
                          "message", "simpleMessage"))
 
 ### accessor to slot package
 startupPackage <- function(startupmessage) {startupmessage$"package"}
-### accessor to slot package
+### accessor to slot type
 startupType <- function(startupmessage) {startupmessage$"type"}
+### accessor to slot endline
+startupEndline <- function(startupmessage) {startupmessage$"endline"}
 
 
 ### suppressing Startup messages by a wrapper
@@ -28,13 +32,13 @@ function (expr,atypes="version")
                                                 c0 = c, atypes=atypes)}) }
 
 ### generating a startupMessage
-startupMessage <- function(..., domain=NULL, pkg="", type="version") {
+startupMessage <- function(..., domain=NULL, pkg="", type="version", endline = FALSE) {
     withRestarts( withCallingHandlers(
                        message(..., domain=domain), 
                        message = function(cond)
                               {SM <- StartupMessage(conditionMessage(cond), 
                                                     conditionCall(cond), 
-                                                    pkg, type)
+                                                    pkg, type, endline)
                               signalCondition(SM)
                               }      ), 
                   onlytypeMessage = function(c0,atypes){

@@ -9,7 +9,7 @@ Illustration of package 'startupmsg'}
 \usage{
 mySMHandler(c)
 mystartupMessage(..., domain = NULL, pkg = "", type="version", 
-                 SMHandler=mySMHandler)
+                 SMHandler=mySMHandler, endline = FALSE)
 
 buildStartupMessage(..., pkg, library=NULL, domain=NULL, 
                     packageHelp=FALSE, MANUAL = NULL, VIGNETTE = NULL,
@@ -27,6 +27,7 @@ buildStartupMessage(..., pkg, library=NULL, domain=NULL,
               type should be in \code{c("version","notabene","information")}.}
   \item{SMHandler}{function to handle the output of an object of class \code{StartupMessage}, defaults to \code{mySMHandler};
                     btw: \code{SMHandler} stands for /S/tartup/M/essage/Handler/}
+  \item{endline}{logical: shall there be an empty line (TRUE) or a line with linestarter in the end?}
   \item{packageHelp}{logical: is there help available as \code{?}\var{<pkg-name>} ?}
   \item{MANUAL}{character or \code{NULL} if \code{!is.null(MANUAL)}  the name of a manual distributed together with the 
                 package (with relative path within the library) or an URL}

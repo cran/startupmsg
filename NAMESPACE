@@ -2,5 +2,6 @@ export("readVersionInformation", "readURLInformation",
        "pointertoNEWS", "infoShow", "NEWS",
        "StartupMessage", "startupPackage", "startupType", 
        "startupMessage", "suppressStartupMessages",
-       "onlytypeStartupMessages", "buildStartupMessage", 
-       "mySMHandler", "mystartupMessage")
+       "startupEndline", "onlytypeStartupMessages", 
+       "buildStartupMessage", "mySMHandler", 
+       "mystartupMessage")

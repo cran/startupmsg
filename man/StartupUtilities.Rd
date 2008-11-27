@@ -13,6 +13,7 @@
 \alias{StartupMessage}
 \alias{startupPackage}
 \alias{startupType}
+\alias{startupEndline}
 %
 %message generator
 \alias{startupMessage}
@@ -34,12 +35,13 @@ infoShow(pkg, filename, library=NULL)
 NEWS(pkg, library=NULL)
 
 StartupMessage(message, call = NULL, pkg="", 
-               type="version") 
+               type="version", endline = FALSE) 
 startupPackage(startupmessage) 
 startupType(startupmessage) 
+startupEndline(startupmessage) 
 
 startupMessage(..., domain = NULL, pkg = "", 
-               type="version")
+               type="version", endline = FALSE)
 
 suppressStartupMessages(expr)
 onlytypeStartupMessages(expr,atypes="version")
@@ -56,6 +58,7 @@ onlytypeStartupMessages(expr,atypes="version")
   \item{call}{a call expression -- the call part of an S3-object of class \code{StartupMessage}}
   \item{type}{character -- the type part of an S3-object of class \code{StartupMessage}; currently, 
               type should be in \code{c("version","notabene","information")}.}
+  \item{endline}{a logical -- the decision on the ending of an S3-object of class \code{StartupMessage}}
   \item{startupmessage}{the \code{StartupMessage} object whose slot \code{package} is to be inspected}
   \item{domain}{see \code{gettext}. If \code{NA}, messages will not be translated.}
   \item{atypes}{a vector of characters -- the types of \code{StartupMessage}-objects which \code{onlytypeStartupMessages}
@@ -79,9 +82,11 @@ to retrieve this file from within R, else \code{pointertoNEWS}  returns \code{NU
 A new sub-condition \code{StartupMessage} to \code{message} is introduced, 
 with a constructor with the same name. 
 
-In addition to the slots of \code{message}, it also has slots \code{package} (for the package they are for)
-and \code{type} (currently in  \code{c("version","notabene","information")}).
-These slot may be accessed by \code{startupPackage} and \code{startupType}, respectively.
+In addition to the slots of \code{message}, it also has slots \code{package} (for the package they are for), 
+\code{type} (currently in  \code{c("version","notabene","information")}), and
+\code{endline} (a logical).
+These slots may be accessed by \code{startupPackage}, \code{startupType}, and
+\code{startupEndline}, respectively.
 
 \code{startupMessage} issues a start-up message which also is represented as a condition.
  While the start-up message is being processed, the following restarts are available:
