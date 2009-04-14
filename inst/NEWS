@@ -3,6 +3,15 @@
 ######################################################################
 
 ##############
+v 0.6
+##############
+
+* Rd-style:
+  + several buglets detected with the fuzzier checking mechanism
+    cf [Rd] More intensive checking of R help files, Prof Brian Ripley, 09.01.2009 10:25) 
+       [Rd] Warning: missing text for item ... in \describe? , Prof Brian Ripley,
+
+##############
 v 0.5.3
 ##############
   
