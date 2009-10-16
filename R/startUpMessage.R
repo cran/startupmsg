@@ -94,3 +94,9 @@ NEWS<-function(pkg, library=NULL)
     infoShow(pkg, filename="NEWS", library=library)
 }
 #######################################################################
+
+### analogously:
+TOBEDONE<-function(pkg, library=NULL)
+{   ## inspired by Andy Liaw
+    infoShow(pkg, filename="TOBEDONE", library=library)
+}

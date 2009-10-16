@@ -3,6 +3,22 @@
 ######################################################################
 
 ##############
+v 0.7
+##############
+
+user-visible CHANGES:
+
++ new command TOBEDONE() --- similarly to NEWS() to access TOBEDONE file
+
+GENERAL ENHANCEMENTS:
+
++ added tests/Examples folder with file startupmsg-Ex.Rout.save to have
+  some automatic testing
++ added field "Encoding: latin1" to all DESCRIPTION files in order to avoid problems 
+  with e.g. Windows locale when svn replaces $LastChangedDate
++ added TOBEDONE (sic!) files for each package (by accident also in trunc; these are empty so far)
+
+##############
 v 0.6
 ##############
 

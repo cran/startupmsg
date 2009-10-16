@@ -4,6 +4,7 @@
 %
 %Utilities
 \alias{infoShow}
+\alias{TOBEDONE}
 \alias{NEWS}
 \alias{readVersionInformation}
 \alias{readURLInformation}
@@ -33,6 +34,7 @@ pointertoNEWS(pkg, library=NULL)
 
 infoShow(pkg, filename, library=NULL)
 NEWS(pkg, library=NULL)
+TOBEDONE(pkg, library=NULL)
 
 StartupMessage(message, call = NULL, pkg="", 
                type="version", endline = FALSE) 
@@ -77,7 +79,9 @@ If there is a \file{NEWS} in the package main folder, \code{pointertoNEWS} retur
 to retrieve this file from within R, else \code{pointertoNEWS}  returns \code{NULL}.
 
 \code{infoShow} displays the file \code{filename} in the package main folder using \code{file.show} -- if it exists;
-\code{NEWS} in particular displays the \file{NEWS} file; takes up an idea by Andy Liaw.
+\code{NEWS} in particular displays the \file{NEWS} file,
+and analogously, \code{TOBEDONE} in particular displays the \file{TOBEDONE}
+file; takes up an idea by Andy Liaw.
 
 A new sub-condition \code{StartupMessage} to \code{message} is introduced, 
 with a constructor with the same name. 

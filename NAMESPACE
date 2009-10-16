@@ -1,5 +1,5 @@
 export("readVersionInformation", "readURLInformation",
-       "pointertoNEWS", "infoShow", "NEWS",
+       "pointertoNEWS", "infoShow", "NEWS", "TOBEDONE",
        "StartupMessage", "startupPackage", "startupType", 
        "startupMessage", "suppressStartupMessages",
        "startupEndline", "onlytypeStartupMessages", 
