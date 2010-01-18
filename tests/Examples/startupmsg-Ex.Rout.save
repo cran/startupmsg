@@ -1,7 +1,8 @@
 
-R version 2.10.0 beta (2009-10-15 r50107)
-Copyright (C) 2009 The R Foundation for Statistical Computing
+R version 2.12.1 Patched (2011-01-04 r53913)
+Copyright (C) 2011 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
+Platform: x86_64-unknown-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -17,84 +18,19 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
-> ### * <HEADER>
-> ###
-> attach(NULL, name = "CheckExEnv")
-> assign("nameEx",
-+        local({
-+ 	   s <- "__{must remake R-ex/*.R}__"
-+            function(new) {
-+                if(!missing(new)) s <<- new else s
-+            }
-+        }),
-+        pos = "CheckExEnv")
-> ## Add some hooks to label plot pages for base and grid graphics
-> assign("base_plot_hook",
-+        function() {
-+            pp <- par(c("mfg","mfcol","oma","mar"))
-+            if(all(pp$mfg[1:2] == c(1, pp$mfcol[2]))) {
-+                outer <- (oma4 <- pp$oma[4]) > 0; mar4 <- pp$mar[4]
-+                mtext(sprintf("help(\"%s\")", nameEx()), side = 4,
-+                      line = if(outer)max(1, oma4 - 1) else min(1, mar4 - 1),
-+                outer = outer, adj = 1, cex = .8, col = "orchid", las=3)
-+            }
-+        },
-+        pos = "CheckExEnv")
-> assign("grid_plot_hook",
-+        function() {
-+            grid::pushViewport(grid::viewport(width=grid::unit(1, "npc") -
-+                               grid::unit(1, "lines"), x=0, just="left"))
-+            grid::grid.text(sprintf("help(\"%s\")", nameEx()),
-+                            x=grid::unit(1, "npc") + grid::unit(0.5, "lines"),
-+                            y=grid::unit(0.8, "npc"), rot=90,
-+                            gp=grid::gpar(col="orchid"))
-+        },
-+        pos = "CheckExEnv")
-> setHook("plot.new",     get("base_plot_hook", pos = "CheckExEnv"))
-> setHook("persp",        get("base_plot_hook", pos = "CheckExEnv"))
-> setHook("grid.newpage", get("grid_plot_hook", pos = "CheckExEnv"))
-> assign("cleanEx",
-+        function(env = .GlobalEnv) {
-+ 	   rm(list = ls(envir = env, all.names = TRUE), envir = env)
-+            RNGkind("default", "default")
-+ 	   set.seed(1)
-+    	   options(warn = 1)
-+ 	   .CheckExEnv <- as.environment("CheckExEnv")
-+ 	   delayedAssign("T", stop("T used instead of TRUE"),
-+ 		  assign.env = .CheckExEnv)
-+ 	   delayedAssign("F", stop("F used instead of FALSE"),
-+ 		  assign.env = .CheckExEnv)
-+ 	   sch <- search()
-+ 	   newitems <- sch[! sch %in% .oldSearch]
-+ 	   for(item in rev(newitems))
-+                eval(substitute(detach(item), list(item=item)))
-+ 	   missitems <- .oldSearch[! .oldSearch %in% sch]
-+ 	   if(length(missitems))
-+ 	       warning("items ", paste(missitems, collapse=", "),
-+ 		       " have been removed from the search path")
-+        },
-+        pos = "CheckExEnv")
-> assign("ptime", proc.time(), pos = "CheckExEnv")
-> ## at least one package changes these via ps.options(), so do this
-> ## before loading the package.
-> ## Use postscript as incomplete files may be viewable, unlike PDF.
-> ## Choose a size that is close to on-screen devices, fix paper
-> grDevices::ps.options(width = 7, height = 7, paper = "a4", reset = TRUE)
-> grDevices::postscript("startupmsg-Ex.ps")
-> 
-> assign("par.postscript", graphics::par(no.readonly = TRUE), pos = "CheckExEnv")
-> options(contrasts = c(unordered = "contr.treatment", ordered = "contr.poly"))
+> pkgname <- "startupmsg"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
 > options(warn = 1)
 > library('startupmsg')
-:startupmsg>  Utilities for start-up messages (version 0.7)
+:startupmsg>  Utilities for start-up messages (version 0.7.1)
 :startupmsg> 
 :startupmsg>  For more information see ?"startupmsg",
 :startupmsg>  NEWS("startupmsg")
 
 > 
 > assign(".oldSearch", search(), pos = 'CheckExEnv')
-> assign(".oldNS", loadedNamespaces(), pos = 'CheckExEnv')
-> cleanEx(); nameEx("StartupUtilities")
+> cleanEx()
+> nameEx("StartupUtilities")
 > ### * StartupUtilities
 > 
 > flush(stderr()); flush(stdout())
@@ -159,7 +95,7 @@ this is an ordinary message
 > ### reading information file utilities
 > readVersionInformation("stats")
 $ver
-[1] "2.10.0"
+[1] "2.12.1"
 
 $title
 [1] "The R Stats Package"
@@ -170,13 +106,14 @@ NULL
 > pointertoNEWS("stats") ## no NEWS file;
 NULL
 > NEWS("stats") ## no NEWS file; 
-Cannot open file '/home/btms02/RTOP/Rbranch/library/stats/NEWS': No such file or directory
+Cannot open file '/home/kohlm/RTOP/Rbranch/library/stats/NEWS': No such file or directory
 
 > ## for packages with NEWS file see e.g. randomForest, distr
 > 
 > 
 > 
-> cleanEx(); nameEx("myStartupUtilities")
+> cleanEx()
+> nameEx("myStartupUtilities")
 > ### * myStartupUtilities
 > 
 > flush(stderr()); flush(stdout())
@@ -194,7 +131,7 @@ Cannot open file '/home/btms02/RTOP/Rbranch/library/stats/NEWS': No such file or
 > 
 > ## issuing of messages controlled by options()
 > buildStartupMessage(pkg="stats", msg) 
-:stats>  The R Stats Package (version 2.10.0)
+:stats>  The R Stats Package (version 2.12.1)
 :stats> 
 :stats>  Note that you may set global options by options() --- cf.
 :stats>  ?"options".
@@ -203,13 +140,13 @@ Cannot open file '/home/btms02/RTOP/Rbranch/library/stats/NEWS': No such file or
 > suppressMessages(buildStartupMessage(pkg="stats", msg))
 > onlytypeStartupMessages(buildStartupMessage(pkg="stats", msg),
 +           atypes="version")
-The R Stats Package (version 2.10.0)
+The R Stats Package (version 2.12.1)
 
 > 
 > getOption("StartupBanner")
 NULL
 > buildStartupMessage(pkg="stats", msg)
-:stats>  The R Stats Package (version 2.10.0)
+:stats>  The R Stats Package (version 2.12.1)
 :stats> 
 :stats>  Note that you may set global options by options() --- cf.
 :stats>  ?"options".
@@ -222,7 +159,7 @@ NULL
 > options("StartupBanner"="complete");getOption("StartupBanner")
 [1] "complete"
 > buildStartupMessage(pkg="stats", msg)
-:stats>  The R Stats Package (version 2.10.0)
+:stats>  The R Stats Package (version 2.12.1)
 :stats> 
 :stats>  Note that you may set global options by options() --- cf.
 :stats>  ?"options".
@@ -231,13 +168,13 @@ NULL
 > options("StartupBanner"="something else");getOption("StartupBanner")
 [1] "something else"
 > buildStartupMessage(pkg="stats", msg)
-:stats>  The R Stats Package (version 2.10.0)
+:stats>  The R Stats Package (version 2.12.1)
 :stats> 
 > 
 > options("StartupBanner"=NULL);getOption("StartupBanner")
 NULL
 > buildStartupMessage(pkg="stats", msg)
-:stats>  The R Stats Package (version 2.10.0)
+:stats>  The R Stats Package (version 2.12.1)
 :stats> 
 :stats>  Note that you may set global options by options() --- cf.
 :stats>  ?"options".
@@ -246,7 +183,7 @@ NULL
 > 
 > MNH <- "http://www.r-project.org/"
 > buildStartupMessage(pkg="stats", msg, packageHelp=TRUE, MANUAL=MNH)
-:stats>  The R Stats Package (version 2.10.0)
+:stats>  The R Stats Package (version 2.12.1)
 :stats> 
 :stats>  Note that you may set global options by options() --- cf.
 :stats>  ?"options".
@@ -258,7 +195,7 @@ NULL
 > ## "demo/nlm.R" as a "manual": to be system-independent the 
 > ## first call is to be preferred 
 > buildStartupMessage(pkg="stats", msg, packageHelp=TRUE, MANUAL=c("demo","nlm.R"))
-:stats>  The R Stats Package (version 2.10.0)
+:stats>  The R Stats Package (version 2.12.1)
 :stats> 
 :stats>  Note that you may set global options by options() --- cf.
 :stats>  ?"options".
@@ -267,7 +204,7 @@ NULL
 
 > ###  works, too, (i.e. is equivalent) under Linux and Windows (at least):
 > buildStartupMessage(pkg="stats", msg, packageHelp=TRUE, MANUAL="demo/nlm.R")
-:stats>  The R Stats Package (version 2.10.0)
+:stats>  The R Stats Package (version 2.12.1)
 :stats> 
 :stats>  Note that you may set global options by options() --- cf.
 :stats>  ?"options".
@@ -281,7 +218,7 @@ NULL
 > ### * <FOOTER>
 > ###
 > cat("Time elapsed: ", proc.time() - get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.108 0.008 0.123 0.004 0.004 
+Time elapsed:  0.12 0 0.128 0 0 
 > grDevices::dev.off()
 null device 
           1 
