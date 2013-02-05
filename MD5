@@ -1,12 +1,12 @@
-fb9f2150786532fdfbd83b57561322d5 *DESCRIPTION
+df5c2099363b29192206dc1556f2ccef *DESCRIPTION
 9fbb5850478ffb6bea9fdb2a5dd70888 *NAMESPACE
 a1fc82c20e3471a660a344fbc2132168 *R/00.r
 6eb9de0bf71b1eafdf2a825aadfaebcc *R/illustration.R
 6bf0edd4351e01e0046c189c4051752b *R/mySMHandler.R
 4ad7161907d1dbde877acea193783b4a *R/startUpMessage.R
-cff749a5ac43ea7ae7a59ea4515567f1 *inst/NEWS
+6832938f723c045f90194ff14122d093 *inst/NEWS
 b53a8f4feb517efd4fce0c95cfd34f42 *inst/TOBEDONE
 baba3f2f2f2f3bc5e46f1e46deb0c958 *man/StartupUtilities.Rd
 056324fbd91cb7f533c755fea9674b22 *man/myStartupUtilities.Rd
 312c272744bb0a656604cfc50fc9b99a *startupmsg-Ex.R
-ce9ca646e187377e5870dc9397e74624 *tests/Examples/startupmsg-Ex.Rout.save
+0866eef735828344c15469a82dfe79f6 *tests/Examples/startupmsg-Ex.Rout.save

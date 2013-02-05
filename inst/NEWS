@@ -3,6 +3,16 @@
 ######################################################################
 
 ##############
+v 0.8
+##############
+
+under the hood: 
++ startupmsg gains a namespace
++ added DESCRIPTION tag "ByteCompile" to all our packages
++ updating maintainer email address and URL.
++ deleted no longer needed chm folders
+
+##############
 v 0.7
 ##############
 
