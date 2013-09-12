@@ -1,7 +1,7 @@
 Package: startupmsg
 Encoding: latin1
-Version: 0.8
-Date: 2013-02-05
+Version: 0.9
+Date: 2013-09-12
 Title: Utilities for start-up messages
 Description: Utilities for start-up messages
 Author: Peter Ruckdeschel
@@ -9,10 +9,11 @@ Maintainer: Peter Ruckdeschel <Peter.Ruckdeschel@itwm.fraunhofer.de>
 Depends: R(>= 1.8.0)
 ByteCompile: yes
 License: LGPL-3
-LastChangedDate: {$LastChangedDate: 2013-02-05 01:01:14 +0100 (Di, 05
-        Feb 2013) $}
-LastChangedRevision: {$LastChangedRevision: 875 $}
-SVNRevision: 768
-Packaged: 2013-02-05 16:23:09 UTC; ruckdesc
+LastChangedDate: {$LastChangedDate: 2011-11-18 13:41:19 +0100 (Fr, 18
+        Nov 2011) $}
+LastChangedRevision: {$LastChangedRevision: 768 $}
+SVNRevision: 913
+Packaged: 2013-09-12 21:17:37 UTC; ruckdesc
+NeedsCompilation: no
 Repository: CRAN
-Date/Publication: 2013-02-07 19:32:47
+Date/Publication: 2013-09-13 17:41:15

@@ -3,6 +3,19 @@
 ######################################################################
 
 ##############
+v 0.9
+##############
+
+user-visible CHANGES:
+
+GENERAL ENHANCEMENTS:
+
+under the hood:
+added .Rbuildignore
+
+BUGFIXES:
+
+##############
 v 0.8
 ##############
 
