@@ -81,7 +81,7 @@ let us describe the latter possibility here:
                     }%
 }
 
-\author{Peter Ruckdeschel \email{Peter.Ruckdeschel@itwm.fraunhofer.de}}
+\author{Peter Ruckdeschel \email{peter.ruckdeschel@uni-oldenburg.de}}
 \examples{
 ## a set of test messages
 

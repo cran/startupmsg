@@ -114,7 +114,7 @@ The user may suppress the start-up messages produced by these utilities as follo
 }
 \section{Acknowledgement}{Thanks to Seth Falcon for his helpful comments.}
 
-\author{Peter Ruckdeschel \email{Peter.Ruckdeschel@itwm.fraunhofer.de}}
+\author{Peter Ruckdeschel \email{peter.ruckdeschel@uni-oldenburg.de}}
 \examples{
 ## a set of test messages
 several.messages<-function() {
