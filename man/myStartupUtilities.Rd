@@ -110,7 +110,7 @@ options("StartupBanner"=NULL);getOption("StartupBanner")
 buildStartupMessage(pkg="stats", msg)
 
 
-MNH <- "http://www.r-project.org/"
+MNH <- "https://www.r-project.org/"
 buildStartupMessage(pkg="stats", msg, packageHelp=TRUE, MANUAL=MNH)
 ## not quite a manual, but to illustrate the principle:
 ## "demo/nlm.R" as a "manual": to be system-independent the 

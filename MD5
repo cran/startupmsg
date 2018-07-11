@@ -1,10 +1,10 @@
-8efa8d7236e7675ce226f7df8c943c1b *DESCRIPTION
-9fbb5850478ffb6bea9fdb2a5dd70888 *NAMESPACE
+8e64bbfba8ea3190b4e57495a4251cc6 *DESCRIPTION
+48cbacfd60fffc8163322b6f289cee5d *NAMESPACE
 a1fc82c20e3471a660a344fbc2132168 *R/00.r
-6eb9de0bf71b1eafdf2a825aadfaebcc *R/illustration.R
+2ccc59b8fa84cd30398a299cc9a877f8 *R/illustration.R
 6bf0edd4351e01e0046c189c4051752b *R/mySMHandler.R
 4ad7161907d1dbde877acea193783b4a *R/startUpMessage.R
 fb159d7e28372c6495c0294e078880f4 *inst/NEWS
 b53a8f4feb517efd4fce0c95cfd34f42 *inst/TOBEDONE
 d9e3355c2534e3f0575485f623cf1350 *man/StartupUtilities.Rd
-f1a16dfb068c6a25e6044937624d15c1 *man/myStartupUtilities.Rd
+4ae6b5b999b51957166887b8be57f10c *man/myStartupUtilities.Rd

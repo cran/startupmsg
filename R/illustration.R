@@ -64,7 +64,7 @@ if((getOption("StartupBanner")=="complete")||
      MANUALL <- FALSE
      MANUALS <- ""
      if(!is.null(MANUAL))
-        {if (all(substr(as.character(MANUAL),1,7)=="http://")) 
+        {if (all(substr(as.character(MANUAL),1,7)=="https://"))
                {MANUALL <- TRUE
                 MANUALS <- c("\n  ",MANUAL)}
          else  {MANUAL1 <- paste(MANUAL, 
