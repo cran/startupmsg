@@ -72,53 +72,93 @@ The user may suppress the start-up messages produced by \code{buildStartupMessag
 Either by \code{suppressStartupMessages(expr)} and \code{onlyversionStartupMessages(expr, atypes="version")}
 as for \code{startupmessage} (confer \code{\link{startupmsg}}), or -- as proposed by Brian Ripley -- by \code{options};
 let us describe the latter possibility here: 
-\itemize{\item \code{options("StartupBanner"="off")} switches off all start-up messages%
+\itemize{\item \code{options("StartupBanner" = "off")} switches off all start-up messages%
           \item if option \code{"StartupBanner"} is not defined (default) or setting    
-                    \code{options("StartupBanner"=NULL)} or  \code{options("StartupBanner"="complete")} 
+                    \code{options("StartupBanner" = NULL)} or  \code{options("StartupBanner" = "complete")} 
                     the complete start-up banner is displayed 
-          \item for any other value of option \code{"StartupBanner"} (i.e., not in \code{c(NULL,"off","complete")})
+          \item for any other value of option \code{"StartupBanner"} (i.e., not in \code{c(NULL, "off", "complete")})
                     only the version information is displayed 
-                    }%
+          \item from pkg version 1.0.0 on, the default of this option value is "no-version" (respectively "no - version"),
+                which suppresses version information to avoid unnecessary cascade of pkg submissions to CRAN triggered
+                by startup messages showing changed version information of attached/loaded packages up-stream.				
+			    }%
+Also, from version 1.0.0 on, we show a hint on how to obtain version information of all attached packages,
+regardless of whether these use start-up messages managed by this packages; i.e.; through sessionInfo().
+This hint is only shown once per session, but can also be switched on and off through 
+\code{options("StartupShowHint_sessionInfo")} set to \code{TRUE} or \code{FALSE}, respectively.				
 }
 
 \author{Peter Ruckdeschel \email{peter.ruckdeschel@uni-oldenburg.de}}
 \examples{
+#----------------------------
+### save old option values
+( oldOptionStartupBanner <- getOption("StartupBanner") )
+( oldOptionStartupShowHint_sessionInfo <- getOption("StartupShowHint_sessionInfo") )
+###
+#----------------------------
+
+
 ## a set of test messages
 
+options("StartupBanner" = "complete")
 msg <- "Note that you may set global options by options() --- cf. ?\"options\"."
 
 ## issuing of messages controlled by options()
-buildStartupMessage(pkg="stats", msg) 
-suppressStartupMessages(buildStartupMessage(pkg="stats", msg) )
-suppressMessages(buildStartupMessage(pkg="stats", msg))
-onlytypeStartupMessages(buildStartupMessage(pkg="stats", msg),
-          atypes="version")
-
-getOption("StartupBanner")
-buildStartupMessage(pkg="stats", msg)
-
-options("StartupBanner"="off");getOption("StartupBanner")
-buildStartupMessage(pkg="stats", msg)
-
-options("StartupBanner"="complete");getOption("StartupBanner")
-buildStartupMessage(pkg="stats", msg)
-
-options("StartupBanner"="something else");getOption("StartupBanner")
-buildStartupMessage(pkg="stats", msg)
-
-options("StartupBanner"=NULL);getOption("StartupBanner")
-buildStartupMessage(pkg="stats", msg)
-
+buildStartupMessage(pkg = "stats", msg) 
+suppressStartupMessages(buildStartupMessage(pkg = "stats", msg) )
+suppressMessages(buildStartupMessage(pkg = "stats", msg))
+onlytypeStartupMessages(buildStartupMessage(pkg = "stats", msg),
+          atypes = "version")
 
 MNH <- "https://www.r-project.org/"
-buildStartupMessage(pkg="stats", msg, packageHelp=TRUE, MANUAL=MNH)
+buildStartupMessage(pkg = "stats", msg, packageHelp = TRUE, MANUAL = MNH)
 ## not quite a manual, but to illustrate the principle:
 ## "demo/nlm.R" as a "manual": to be system-independent the 
 ## first call is to be preferred 
-buildStartupMessage(pkg="stats", msg, packageHelp=TRUE, MANUAL=c("demo","nlm.R"))
+buildStartupMessage(pkg="stats", msg, packageHelp = TRUE, MANUAL = c("demo", "nlm.R"))
 ###  works, too, (i.e. is equivalent) under Linux and Windows (at least):
-buildStartupMessage(pkg="stats", msg, packageHelp=TRUE, MANUAL="demo/nlm.R")
+buildStartupMessage(pkg = "stats", msg, packageHelp = TRUE, MANUAL = "demo/nlm.R")
+###
 
+#----------------------------
+### options switching on and off hints and details of start-up messages
+#----------------------------
+
+buildStartupMessage(pkg = "stats", msg)
+
+options("StartupBanner" = "off")
+buildStartupMessage(pkg = "stats", msg)
+
+options("StartupBanner" = "complete")
+buildStartupMessage(pkg = "stats", msg)
+
+options("StartupBanner"="something else")
+buildStartupMessage(pkg="stats", msg)
+
+options("StartupBanner" = NULL)
+buildStartupMessage(pkg = "stats", msg)
+
+options("StartupBanner" = "no-version") ## default
+buildStartupMessage(pkg = "stats", msg)
+
+options("StartupBanner" = "no - version")
+options("StartupShowHint_sessionInfo" = FALSE)
+buildStartupMessage(pkg = "startupmsg", packageHelp = TRUE)
+
+options("StartupBanner" = "no - version")
+options("StartupShowHint_sessionInfo" = TRUE)
+buildStartupMessage(pkg = "startupmsg", packageHelp = TRUE)
+
+options("StartupBanner" = "no-version")
+buildStartupMessage(pkg = "startupmsg", packageHelp = TRUE)
+
+options("StartupBanner" = "complete")
+buildStartupMessage(pkg = "startupmsg", packageHelp = TRUE)
+
+## restore old values 
+options("StartupBanner" = oldOptionStartupBanner)
+options("StartupShowHint_sessionInfo" = oldOptionStartupShowHint_sessionInfo)
+rm(oldOptionStartupBanner, oldOptionStartupShowHint_sessionInfo)
 }
 
 \seealso{Mail "[Rd] Wishlist: 'quietly' argument for .onAttach() / .First.lib()  "

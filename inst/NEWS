@@ -3,7 +3,32 @@
 ######################################################################
 
 ##############
-v 0.9.7
+v 1.0.0
+##############
+
+under the hood:
+We instantiated a more refined mechanism for startup messages, to avoid 
+unnecessary pkg version updates just triggered by startup messages issuing
+version information of attached packages upstream, which changes the
+reference output of the attaching package and hence creates diffs when
+tested on CRAN.
+
+Somewhat more detailed, in the prior regime, suppose we had pkgs pkgA and pkgB on 
+CRAN, pkgB importing the NAMESPACE of pkgA via depends, and both pkgs pkgA and pkgB 
+had startup messages including version information, and pkgB used the reference 
+output <pkgB>-Ex.Rout.save as a unit test for pkgB. Then, whenever we submitted an 
+updated version of pkgA to CRAN, we had to also submit a new version of pkgB to CRAN 
+regardless whether we had changed anything in pkgB, because of the changed version 
+information in the startup message of pkgA which showed up in the reference output 
+when pkgA was attached at loading pkgB.
+
+To avoid this, by default our startup messages no longer issue version information
+of the attached packages, but --only once per session-- we show a startup message
+indicating how to show the prior behaviour, i.e., show the version information
+of attached packages in the startup messages.
+
+##############
+v 0.9.7 (not submitted to CRAN)
 ##############
 
 under the hood:

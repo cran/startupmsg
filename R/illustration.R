@@ -34,16 +34,53 @@ mystartupMessage <- function(..., domain = NULL, pkg = "", type = "version",
  invisible(NULL) 
 }
 
-buildStartupMessage <- function(..., pkg, library=NULL, domain=NULL,
-                                packageHelp=FALSE, MANUAL = NULL, 
+buildStartupMessage <- function(..., pkg, library = NULL, domain = NULL,
+                                packageHelp = FALSE, MANUAL = NULL, 
                                 VIGNETTE = NULL,
-                                SMHandler=mySMHandler){
+                                SMHandler = mySMHandler){
 #
-tit.vers <- readVersionInformation(pkg,library)
-if((!getOption("StartupBanner")=="off")||is.null(getOption("StartupBanner"))) 
-       mystartupMessage(tit.vers$"title", " (version ", tit.vers$"ver", ")", 
+tit.vers <- readVersionInformation(pkg, library)
+if((!getOption("StartupBanner") == "off") || is.null(getOption("StartupBanner"))){
+    
+	versionHint0 <- gettext(
+	   'Detailed information about which packages are currently loaded ',
+       'or attached at which version (regardless of whether these have ',
+	   'start-up messages managed by this package) can be obtained by ',
+	   '"sessionInfo()".\n', 
+	   domain = domain)
+	versionHint <- ""
+	if(!is.null(getOption("StartupShowHint_sessionInfo")))   
+	   if(getOption("StartupShowHint_sessionInfo") ) versionHint <- versionHint0
+	
+	if(is.null(getOption("StartupBanner")) || 
+	   !getOption("StartupBanner") %in% c( "no-version", "no - version")){
+       mystartupMessage(tit.vers$"title", " (version ", tit.vers$"ver", ")\n",
+                        versionHint,  	   
                         domain = domain, pkg = pkg, type="version", 
                         SMHandler = SMHandler)
+	}else{
+       versInfoText <- ""
+	   if( getOption("StartupBanner")== "no-version" ){
+	       ## if no-version show this once but no more often:
+		   options("StartupBanner" = "no - version")
+	       versInfoText <- gettext(
+		      "Version information in start-up messages is currently suppressed. ", 
+	          'To see such information on startup as in versions of this pkg ',
+			  'prior to this versionr, set option "StartupBanner" to a value ', 
+			  'different to {"off", "no-version", "no - version"}, e.g., by ',
+              'options("StartupBanner" = "complete") or by ', 
+			  'options("StartupBanner" = NULL) or by ',
+	          'options("StartupBanner" = "something else").\n',
+			   domain = domain)
+	   }	   
+	   mystartupMessage("*** ",tit.vers$"title", " ***\n\n", versInfoText, 
+	     versionHint,  	                          
+		 domain = domain, pkg = pkg, type="information", 
+                        SMHandler = SMHandler)        		
+	}
+    options("StartupShowHint_sessionInfo" = FALSE)
+}	 
+
 ###
 if((getOption("StartupBanner")=="complete")||
     is.null(getOption("StartupBanner"))){ 
@@ -98,8 +135,8 @@ if((getOption("StartupBanner")=="complete")||
      #
      if (L>0){
           if (llist > 0)
-          mystartupMessage(..., domain=domain, pkg=pkg, type="notabene", 
-                          SMHandler=SMHandler)
+          mystartupMessage(..., domain = domain, pkg = pkg, type = "notabene", 
+                          SMHandler = SMHandler)
 
           mystartupMessage("For more information see ", 
                          packageHelpS, seps[1], NEWSS, seps[2], URLS, seps[3], 
@@ -109,8 +146,8 @@ if((getOption("StartupBanner")=="complete")||
     }
     else{
           if (llist > 0)
-          mystartupMessage(..., domain=domain, pkg=pkg, type="notabene", 
-                          SMHandler=SMHandler, endline = TRUE)
+          mystartupMessage(..., domain = domain, pkg = pkg, type = "notabene", 
+                          SMHandler = SMHandler, endline = TRUE)
     } 
    }
 }

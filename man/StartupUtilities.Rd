@@ -152,12 +152,15 @@ withCallingHandlers(doit(),
                     })
 ### reading information file utilities
 readVersionInformation("stats")
-readURLInformation("stats")
+readURLInformation("MASS")
 ## for packages with URL file see e.g. dse1
-pointertoNEWS("stats") ## no NEWS file;
+pointertoNEWS("startupmsg") ## no NEWS file;
+
 ## IGNORE_RDIFF_BEGIN
-NEWS("stats") ## no NEWS file; 
+
+NEWS("startupmsg") ## no NEWS file; 
 ## for packages with NEWS file see e.g. randomForest, distr
+
 ## IGNORE_RDIFF_END
 }
 \seealso{\code{\link{buildStartupMessage}} for some illustration;

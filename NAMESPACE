@@ -1,3 +1,4 @@
+importFrom("utils", "packageDescription")
 export("readVersionInformation", "readURLInformation",
        "pointertoNEWS", "infoShow", "NEWS", "TOBEDONE",
        "StartupMessage", "startupPackage", "startupType", 

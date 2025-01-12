@@ -57,20 +57,18 @@ startupMessage <- function(..., domain=NULL, pkg="", type="version", endline = F
 ###############################################################
 
 readVersionInformation <- function(pkg, library=NULL){      
-# next lines are taken from Valentin Todorov's package "rrcov"
-    if(is.null(library)) library <- .Library
-    ver <- read.dcf(file.path(library, pkg, "DESCRIPTION"), "Version")
-    ver <- as.character(ver)
-    title <- read.dcf(file.path(library, pkg, "DESCRIPTION"), "Title")
+    ## 20241113: use utils::packageDescription
+    ver <- utils::packageDescription(pkg, lib.loc = library, fields = "Version")
+	ver <- as.character(ver)
+    title <- utils::packageDescription(pkg, lib.loc = library, fields = "Title")
     title <- as.character(title)
 #
     list(ver=ver, title=title)
 }
 
 readURLInformation <- function(pkg, library=NULL){      
-# next lines are taken from Valentin Todorov's package "rrcov"
-    if(is.null(library)) library <- .Library
-    URL <- read.dcf(file.path(library, pkg, "DESCRIPTION"), "URL")
+    ## 20241113: use utils::packageDescription
+    URL <- utils::packageDescription(pkg, lib.loc = library, fields = "URL")
     if(is.na(URL)||(is.character(URL)&&length(URL)==0)) return(NULL)
     else return(as.character(URL))
 }
